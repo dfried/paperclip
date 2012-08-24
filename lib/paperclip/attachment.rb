@@ -136,10 +136,15 @@ module Paperclip
     def url(style_name = default_style, options = {})
       default_options = {:timestamp => @options[:use_timestamp], :escape => true}
 
-      if options == true || options == false # Backwards compatibility.
-        @url_generator.for(style_name, default_options.merge(:timestamp => options))
+      if @options[:fog_public] == false
+        self.expiring_url(Time.now+3600, style_name)
       else
-        @url_generator.for(style_name, default_options.merge(options))
+
+        if options == true || options == false # Backwards compatibility.
+          @url_generator.for(style_name, default_options.merge(:timestamp => options))
+        else
+          @url_generator.for(style_name, default_options.merge(options))
+        end
       end
     end
 
