@@ -128,7 +128,7 @@ module Paperclip
       end
 
       def expiring_url(time = (Time.now + 3600), style = default_style)
-        object_name = path_style || ""
+        object_name = path(style) || ""
         expiring_url = directory.files.get_https_url(object_name, time)
 
         if @options[:fog_host]
