@@ -132,7 +132,7 @@ module Paperclip
         expiring_url = directory.files.get_https_url(object_name, time)
 
         if @options[:fog_host]
-          expiring_url.gsub!(/#{host_name_for_director  y}/, dynamic_fog_host_for_style(style))
+          expiring_url.gsub!(/#{host_name_for_directory}/, dynamic_fog_host_for_style(style))
         end
 
         return expiring_url
